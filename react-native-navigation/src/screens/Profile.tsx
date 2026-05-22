@@ -7,7 +7,6 @@ const Profile = () => {
   return (
     <View>
       <Text>Profile</Text>
-      <Button onPress={() => navigation.goBack()}>Go back</Button>
     </View>
   );
 };

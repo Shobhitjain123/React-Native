@@ -7,16 +7,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
   return (
-    <SafeAreaView>
-      <View>
-        <Text>HomeScreen</Text>
-        <Button
-          onPress={() => navigation.navigate("Details", { name: "John" })}
-        >
-          Go to Details
-        </Button>
-      </View>
-    </SafeAreaView>
+    <View>
+      <Text>HomeScreen</Text>
+    </View>
   );
 };
 
