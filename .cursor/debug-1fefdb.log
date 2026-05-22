@@ -1,0 +1,7 @@
+{"sessionId":"1fefdb","location":"HomeScreen.tsx:11","message":"Navigate to Details called","data":{"params":{"name":"John"}},"timestamp":1779391287641,"hypothesisId":"B"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"routeParams":{"name":"John"},"hasParams":true,"paramName":"John"},"timestamp":1779391287652,"hypothesisId":"A,B,C,D"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"routeParams":{"name":"John"},"hasParams":true,"paramName":"John"},"timestamp":1779391301744,"hypothesisId":"A,B,C,D"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"routeParams":{"name":"John"},"hasParams":true,"paramName":"John"},"timestamp":1779391307095,"hypothesisId":"A,B,C,D"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"hasParams":false},"timestamp":1779391314676,"hypothesisId":"A,B,C,D"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"hasParams":false},"timestamp":1779391314691,"hypothesisId":"A,B,C,D"}
+{"sessionId":"1fefdb","location":"Details.tsx:6","message":"Details screen mounted","data":{"hasParams":false},"timestamp":1779391339433,"hypothesisId":"A,B,C,D"}
