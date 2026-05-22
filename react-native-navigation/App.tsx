@@ -7,11 +7,15 @@ import StaticBottomTabNavigator from "./src/navigators/tabs/StaticBottomTabNavig
 import DynamicBottomTabNavigation from "./src/navigators/tabs/DynamicBottomTabNavigator";
 
 import StaticTopTabNavigator from "./src/navigators/tabs/StaticTopTabNavigator";
+
+import StaticDrawerNavigation from "./src/navigators/drawers/StaticDrawerNavigation";
+import DynamicDrawerNavigation from "./src/navigators/drawers/DynamicDrawerNavigation";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StaticTopTabNavigator />
+      <DynamicDrawerNavigation />
     </SafeAreaView>
   );
 }
