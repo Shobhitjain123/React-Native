@@ -3,41 +3,27 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Details from "../../screens/Details";
 import Profile from "../../screens/Profile";
 import HomeScreen from "../../screens/HomeScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Ionicons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
+
+// Dynamic Home Stack
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackNavigation() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Details" component={Details} />
+    </HomeStack.Navigator>
+  );
+}
 
 const DynamicBottomTab = () => {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "green",
-        tabBarIcon: ({ focused, size, color }) => {
-          const icon =
-            route.name === "Home"
-              ? focused
-                ? "home"
-                : "home-outline"
-              : route.name === "Details"
-                ? focused
-                  ? "information-circle"
-                  : "information-circle-outline"
-                : focused
-                  ? "person"
-                  : "person-outline";
-          return <Ionicons name={icon} size={size} color={color} />;
-        },
-      })}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarBadge: 3,
-        }}
-      />
-      <Tab.Screen name="Details" component={Details} />
+    <Tab.Navigator>
+      {/* Stack inside a Tab Navigation */}
+      <Tab.Screen name="Home" component={HomeStackNavigation} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );

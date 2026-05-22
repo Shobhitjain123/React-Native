@@ -9,6 +9,9 @@ const HomeScreen = () => {
   return (
     <View>
       <Text>HomeScreen</Text>
+      <Button onPress={() => navigation.navigate("Details")}>
+        Go to Details
+      </Button>
     </View>
   );
 };
