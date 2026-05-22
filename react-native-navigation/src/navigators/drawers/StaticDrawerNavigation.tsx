@@ -5,6 +5,10 @@ import Details from "../../screens/Details";
 import Profile from "../../screens/Profile";
 
 const Drawer = createDrawerNavigator({
+  screenOptions: {
+    drawerActiveTintColor: "white",
+    drawerActiveBackgroundColor: "red",
+  },
   screens: {
     Home: HomeScreen,
     Details: Details,
