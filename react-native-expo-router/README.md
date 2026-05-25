@@ -1,8 +1,61 @@
-# Welcome to your Expo app 👋
+# React Native Expo Router
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native project built with [Expo](https://expo.dev) and [Expo Router](https://expo.github.io/router) that demonstrates file-based routing, navigation patterns, and dynamic routes.
 
-## Get started
+## Tech Stack
+
+- **React Native** 0.83.6
+- **Expo** ~55.0
+- **Expo Router** ~55.0 — file-based routing
+- **React Navigation** — Drawer, Bottom Tabs, Stack navigators
+- **React** 19.2.0
+- **TypeScript** ~5.9
+
+## Project Structure
+
+```
+src/app/
+├── _layout.tsx              # Root layout (Stack navigator)
+├── (drawer)/                # Drawer navigation group
+│   ├── _layout.tsx          # Drawer layout with Home, About, Details screens
+│   ├── index.tsx            # Home screen
+│   ├── about.tsx            # About screen
+│   └── details.tsx          # Details screen
+├── profile/
+│   ├── index.tsx            # Profile screen
+│   └── details.tsx          # Profile details screen
+├── [id].tsx                 # Dynamic route — /123, /456, etc.
+├── docs/
+│   └── [...slug].tsx        # Catch-all route — /docs/a/b/c
+├── about.tsx
+└── details.tsx
+```
+
+## Navigation
+
+The app uses a **Stack + Drawer** navigation pattern:
+
+- The root `_layout.tsx` wraps a Stack navigator
+- The `(drawer)` group uses a Drawer navigator with three screens:
+  - **Home** — links to dynamic and nested routes
+  - **About**
+  - **Details**
+
+The codebase also includes commented-out examples for:
+- **Bottom Tabs** navigation (standard and custom tab bar)
+- **Native Tabs** navigation via `expo-router/unstable-native-tabs`
+
+## Routing Features Demonstrated
+
+| Feature | Example Route |
+|---|---|
+| Static routes | `/about`, `/details` |
+| Drawer group | `/(drawer)/` |
+| Dynamic segment | `/[id]` → `/123` |
+| Nested routes | `/profile`, `/profile/details` |
+| Catch-all segment | `/docs/[...slug]` → `/docs/a/b/c` |
+
+## Getting Started
 
 1. Install dependencies
 
@@ -16,41 +69,29 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Then open in:
+   - [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
+   - [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+   - [Expo Go](https://expo.dev/go)
+   - Web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+3. Run on a specific platform directly
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+   ```bash
+   npm run ios
+   npm run android
+   npm run web
+   ```
 
-## Get a fresh project
+## Other Commands
 
-When you're ready, run:
+| Command | Description |
+|---|---|
+| `npm run lint` | Run ESLint via Expo |
+| `npm run reset-project` | Move starter code to `app-example/` and start fresh |
 
-```bash
-npm run reset-project
-```
+## Learn More
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Router docs](https://expo.github.io/router) — File-based routing for React Native
+- [Expo documentation](https://docs.expo.dev/) — Fundamentals and advanced guides
+- [React Navigation](https://reactnavigation.org/) — Drawer, Stack, and Tab navigators
