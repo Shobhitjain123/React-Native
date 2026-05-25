@@ -1,4 +1,6 @@
 import { Drawer } from "expo-router/drawer";
+
+// Drawer Navigation
 export default function Layout() {
   return (
     <Drawer>

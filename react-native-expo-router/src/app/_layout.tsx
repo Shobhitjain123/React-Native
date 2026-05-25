@@ -3,6 +3,7 @@ import { Stack } from "expo-router";
 // import { Tabs } from "expo-router";
 // import { Pressable, Text, View } from "react-native";
 
+// Stack Navigation
 export default function RootLayout() {
   return (
     <Stack>
@@ -11,6 +12,7 @@ export default function RootLayout() {
   );
 }
 
+// Tabs Navigation
 // import { NativeTabs } from "expo-router/unstable-native-tabs";
 
 // export default function TabLayout() {
