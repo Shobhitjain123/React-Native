@@ -1,25 +1,25 @@
 import { db } from "@/lib/db";
 
-interface Ctx {
-  id: string;
-}
+type Ctx = { id: string };
 
-export async function GET(_req: Request, params: Ctx) {
+export async function GET(_req: Request, { id }: Ctx) {
   try {
-    const { id } = params;
+    console.log(id);
     const result = await db.execute({
-      sql: "Select * from users_data where id = ?",
-      args: [id],
+      sql: "SELECT * FROM users_data WHERE id = ?",
+      args: [parseInt(id, 10)],
     });
-    return Response.json({
-      message: "User Data Fetched Successfully",
-      data: result.rows,
-      status: 200,
-    });
+
+    return Response.json(result.rows);
   } catch (error) {
-    return Response.json({
-      error: "User not found",
-      status: 404,
-    });
+    console.error(error);
+    return Response.json(
+      { error: "Failed to fetch user", status: 500 },
+      { status: 500 },
+    );
   }
 }
+
+export async function PATCH(_request: Request, _ctx: Ctx) {}
+
+export async function DELETE(_request: Request, _ctx: Ctx) {}
