@@ -58,47 +58,120 @@
 //   },
 // });
 
-import { Button, StyleSheet, Text, View } from "react-native";
+//////////////////////////////////////////////////////////////////////////
+// import { Button, StyleSheet, Text, View } from "react-native";
+// import React, { useState } from "react";
+// import * as SecureStore from "expo-secure-store";
+// const index = () => {
+//   const [output, setOutput] = useState("");
+
+//   const saveData = async () => {
+//     await SecureStore.setItemAsync("token", "123");
+//     setOutput("Token saved successfully");
+//   };
+
+//   const getData = async () => {
+//     const data = await SecureStore.getItemAsync("token");
+//     setOutput(data!);
+//   };
+
+//   const removeData = async () => {
+//     await SecureStore.deleteItemAsync("token");
+//     setOutput("Token removed successfully");
+//   };
+
+//   const clearStorage = async () => {
+//     await SecureStore.deleteItemAsync("token");
+//     setOutput("Storage cleared successfully");
+//   };
+
+//   const checkAvailable = async () => {
+//     const isAvailable = await SecureStore.isAvailableAsync();
+//     setOutput(
+//       isAvailable ? "Storage is available" : "Storage is not available",
+//     );
+//   };
+
+//   return (
+//     <View>
+//       <Text>{output}</Text>
+//       <Button title="Save Data" onPress={saveData} />
+//       <Button title="Get Data" onPress={getData} />
+//       <Button title="Remove Data" onPress={removeData} />
+//       <Button title="Clear Storage" onPress={clearStorage} />
+//     </View>
+//   );
+// };
+
+// export default index;
+
+// const styles = StyleSheet.create({});
+
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
-import * as SecureStore from "expo-secure-store";
+import * as SQLite from "expo-sqlite";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 const index = () => {
   const [output, setOutput] = useState("");
+  const db = SQLite.openDatabaseSync("default.db");
 
-  const saveData = async () => {
-    await SecureStore.setItemAsync("token", "123");
-    setOutput("Token saved successfully");
+  const createTable = async () => {
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER)
+    `);
+
+    setOutput("Table created successfully");
   };
 
-  const getData = async () => {
-    const data = await SecureStore.getItemAsync("token");
-    setOutput(data!);
+  const insertData = async () => {
+    const result = await db.runAsync(
+      "INSERT INTO users (name, age) VALUES (?, ?)",
+      "Shobhit",
+      26,
+    );
+    setOutput(`Data inserted successfully: ${result.lastInsertRowId}`);
   };
 
-  const removeData = async () => {
-    await SecureStore.deleteItemAsync("token");
-    setOutput("Token removed successfully");
+  const getUsers = async () => {
+    const result = await db.getAllAsync("Select * from users");
+    setOutput(JSON.stringify(result, null, 2));
+  };
+  const getFirstUser = async () => {
+    const result = await db.getFirstAsync("Select * from users");
+    setOutput(JSON.stringify(result));
   };
 
-  const clearStorage = async () => {
-    await SecureStore.deleteItemAsync("token");
-    setOutput("Storage cleared successfully");
-  };
-
-  const checkAvailable = async () => {
-    const isAvailable = await SecureStore.isAvailableAsync();
-    setOutput(
-      isAvailable ? "Storage is available" : "Storage is not available",
+  const updateUser = async () => {
+    const result = await db.runAsync(
+      "Update users Set age = ? where id = ?",
+      21,
+      1,
     );
   };
 
+  const deleteUser = async () => {
+    const result = await db.runAsync("DELETE FROM users WHERE id = ?", 1);
+    setOutput(`Data deleted successfully: ${result.changes}`);
+  };
+
+  const dropTable = async () => {
+    await db.runAsync("DROP TABLE IF EXISTS users");
+    setOutput("Table dropped successfully");
+  };
   return (
-    <View>
-      <Text>{output}</Text>
-      <Button title="Save Data" onPress={saveData} />
-      <Button title="Get Data" onPress={getData} />
-      <Button title="Remove Data" onPress={removeData} />
-      <Button title="Clear Storage" onPress={clearStorage} />
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <Text>{output}</Text>
+        <Button title="Create Table" onPress={createTable} />
+        <Button title="Insert Data" onPress={insertData} />
+        <Button title="Get Users" onPress={getUsers} />
+        <Button title="Get First User" onPress={getFirstUser} />
+        <Button title="Update User" onPress={updateUser} />
+        <Button title="Delete User" onPress={deleteUser} />
+        <Button title="Drop Table" onPress={dropTable} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
