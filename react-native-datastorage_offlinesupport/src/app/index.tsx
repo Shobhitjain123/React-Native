@@ -212,7 +212,11 @@ const index = () => {
     setOutput("File appended successfully");
   };
 
-  const copyFile = () => {
+  const copyFile = async () => {
+    // Delete the destination if it already exists
+    if (copiedFile.exists) {
+      copiedFile.delete();
+    }
     demoFile.copy(copiedFile);
     setOutput("File copied successfully");
   };
